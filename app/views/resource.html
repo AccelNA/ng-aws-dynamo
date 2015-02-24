@@ -1,0 +1,161 @@
+<div data-ng-init="getgroupname()">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".navbar-inverse-collapse"> <i
+					class="icon-reorder shaded"></i>
+				</a> <a class="brand" href="#/resourcehome"> Resource Home </a>
+
+				<div class="nav-collapse collapse navbar-inverse-collapse">
+
+					<ul class="nav pull-right">
+
+
+
+						<li><a href="#/resource">Resource </a></li>
+
+						<li><a href="#/resourcegroup">Resource Group </a></li>
+						<li><a href="#/logout">Log out </a></li>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container" ng-controller="resourceController">
+		<div class="row">
+			<div class="span6 offset3">
+				<div class="content">
+					<div class="module">
+						<div class="module-head">
+							<h3>Resource Management</h3>
+						</div>
+						<div class="module-body">
+							<alert ng-repeat="alert in alerts" type="{{alert.type}}"
+								close="closeAlert($index)">{{alert.msg}}</alert>
+							<form name="resourceForm" class="form-horizontal row-fluid"
+								ng-submit="fnAddresource(resourceForm.$valid)" novalidate>
+								<div class="control-group">
+									<label class="control-label" for="Resource_name">Resource
+										Name</label>
+									<div class="controls">
+										<input type="hidden" name="Resource_user_token"
+											ng-model="userData.Resource_user_token"> 
+											<input type="hidden" name="Resource_resourcegroup_name"
+											ng-model="userData.Resource_resourcegroup_name">
+											<input type="hidden" name="Resource_priority"
+											ng-model="userData.Resource_priority">
+											<input type="text"
+											name="Resource_name"
+											ng-model="userData.Resource_name" class="span10"
+											required>
+										<p
+											ng-show="resourceForm.Resource_name.$invalid && !resourceForm.Resource_name.$pristine"
+											class="help-block has-error">Resource Name is required.</p>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="Resource_priority">Resource
+										Priority</label>
+									<div class="controls">
+										<select data-ng-options="options1 for options1 in options"
+											data-ng-model="priority" >
+											 <option value='d'>--Select--</option>
+											</select>
+										<p
+											ng-show="resourceForm.Resource_priority.$invalid && !resourceForm.Resource_priority.$pristine"
+											class="help-block has-error">Resource Priority is
+											required.</p>
+									</div>
+								</div>
+
+								<div class="control-group">
+									<label class="control-label" for="Resource_decription">Resource
+										Description</label>
+									<div class="controls">
+										<textarea name="Resource_decription"
+											ng-model="userData.Resource_decription"
+											class="span10" required></textarea>
+										<p
+											ng-show="resourceForm.Resource_decription.$invalid && !resourceForm.Resource_decription.$pristine"
+											class="help-block has-error">Description is required.</p>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="Resource_path">Resource
+										path</label>
+									<div class="controls">
+										<textarea name="Resource_path"
+											ng-model="userData.Resource_path" class="span10"
+											required></textarea>
+										<p
+											ng-show="resourceForm.Resource_path.$invalid && !resourceForm.Resource_path.$pristine"
+											class="help-block has-error">Resource Path is required.</p>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="Resource_resourcegroup_name">Resource
+										Group Name</label>
+									<div class="controls">
+
+
+										<select data-ng-options="data1.bookmark_resources_group_name.S for data1 in data"
+											data-ng-model="selected">
+												 <option value=''>--Select--</option>
+											</select>
+										<p
+											ng-show="resourceForm.Resource_resourcegroup_name.$invalid && !resourceForm.Resource_resourcegroup_name.$pristine"
+											class="help-block has-error">Resource Group Name is
+											required.</p>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+										<button type="submit" class="btn btn-primary pull-left"
+											ng-disabled="resourceForm.$invalid">Add Resource
+											</button>
+									</div>
+									<p ng-show="successmsg" class="help-block has-error" ng-bind="successmsg"></p> 
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!--/.content-->
+			</div>
+			<!--/.span9-->
+		</div>
+		<div class="row"  data-ng-init="getresource()">
+			<div class="span12">
+				<input type="text" ng-model="search" placeholder="Search...">
+			</div>
+		</div>
+
+		<table data-ng-table="tableParams" class="table table-bordered">
+			<tr data-ng-repeat="resource in tabledata | filter:search">
+	
+            <td data-title="'Resource Name'"  sortable="'resourceName'">
+               {{resource.resources_name.S}}
+            </td>
+            
+            <td data-title="'Description'">
+               {{resource.resources_name.S}}
+            </td>
+             <td data-title="'Resource-Path'">
+               {{resource.resources_path.S}}
+            </td>
+            <td data-title="'Resource-Priority'">
+                 {{resource.resources_priority.S}}
+            </td>
+            <td data-title="'Resource-Group-Name'">
+                {{resource.resources_group_name.S}}
+            </td>
+				<td data-title="'Action'" align="center" style="text-align: center;">
+				<i class="icon-tasks" ng-click="fnAddNotes( resource.resources_name.S );" title="Add Notes"></i>
+					<i class="icon-pencil" ng-click="fnEditresource( resource );" title="Edit"></i>
+					<i class="icon-remove" ng-click="fnRemoveResource( resource.resources_id.S );"
+					confirmation-needed="Are you sure you want to delete this resource?"
+					title="Delete"></i>
+				</td>
+			</tr>
+		</table> 
+	</div>
