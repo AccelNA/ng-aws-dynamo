@@ -12,7 +12,7 @@ Bookmark.new is a Bookmarking tool for managing digital resources..
 
 * Cloud: Amazon Web Services (AWS)
 * Database: Amazon DynamoDB
-* Message Service: SESj
+* Message Service: SES
 * Server-side: PHP
 * Frontend Framework: AngularJS
 * RWD: Bootstrap
