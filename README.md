@@ -65,19 +65,15 @@ Resource Home Screen will display all the resources saved by the logged  User in
 
 
 ##<a name="Build"></a>How to build
-To build this application You need to have some configurations done in your Eclipse IDE
+To build this application You need to have some configurations done in your files.
 
-**Prerequisites.<br>**
-
-* Eclipse version should be kepler or LUna, The most preffered version is Kepler
-* It should haved Aws Toolkit for eclipse configured .Please refer this link for more details of installing the aws toolkit for eclipse  [http://aws.amazon.com/eclipse/](http://aws.amazon.com/eclipse/).
 
 **Building the Application.<br>**
 
-* Create a AWS PHP Web Project with the name bookmark.new
-* Create a PHP AWS SDK Project and paste all code .
+* Create a AWS PHP Web Project with the name bookmark.
+* Create a PHP AWS SDK Project and download all code.
 * Create the Four tables in the aws DynamoDB with the table name specified in the service.PHP files of the folder .
-* There will be a AWS credential file inside the folder of the newly created project, Please dont forget to ignore that file before committing to git or any other place where there is public access to your code.
+* There will be a AWS credential file inside the folder of the newly created project.
 
 [Technologies Used]: #Technology
 [Features]: #Features
